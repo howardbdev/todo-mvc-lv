@@ -20,14 +20,8 @@ Item.formSubmit = function(e){
   var action = $form.attr("action");
   var params = $form.serialize();
 
-  $.ajax({
-    url: action,
-    data: params,
-    dataType: "json",
-    method: "POST"
-  })
-  .success(Item.success)
-  .error(Item.error)
+  $.post(action, params, (response) => {Item.success(response)}, "json")
+  .fail(Item.error)
 }
 
 Item.destroy = function(json){
