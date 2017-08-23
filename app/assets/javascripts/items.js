@@ -8,6 +8,7 @@ Item.success = function(json){
   var itemLi = item.renderLI()
 
   $("ul.todo-list").append(itemLi)
+  $(".new-todo").val("");
 }
 
 Item.error = function(response){
@@ -20,7 +21,9 @@ Item.formSubmit = function(e){
   var action = $form.attr("action");
   var params = $form.serialize();
 
-  $.post(action, params, (response) => {Item.success(response)}, "json")
+  $.post(action, params, () => {}, "json")
+  // $.post(action, params, (response) => {Item.success(response)}, "json")
+  .success(Item.success)
   .fail(Item.error)
 }
 
